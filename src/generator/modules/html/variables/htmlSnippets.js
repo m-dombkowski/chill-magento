@@ -132,79 +132,97 @@ const htmlSnippets = {
 </style>
   `,
   fakeMenu: `
-<!-- fake-Menu -->
-<div class="menuDesktopScss-root-3xn menuDesktopScss-grid_container-5Vr">
-  <div class="menuDesktopScss-inner-1GU">
-    <button class="secondaryItemDesktopCss-root-p6v">Listing A</button>
-    <button class="secondaryItemDesktopCss-root-p6v">Listing B</button>
+  <!-- fake-Menu -->
+  <div class="menuDesktopScss-root-3xn menuDesktopScss-grid_container-5Vr">
+    <div class="menuDesktopScss-inner-1GU">
+      <button class="secondaryItemDesktopCss-root-p6v">Watch 6 40mm</button>
+      <button class="secondaryItemDesktopCss-root-p6v">Watch 6 44mm</button>
+      <button class="secondaryItemDesktopCss-root-p6v">
+        Watch 6 Classic 43mm
+      </button>
+      <button class="secondaryItemDesktopCss-root-p6v">
+        Watch 6 Classic 47mm
+      </button>
+    </div>
   </div>
-</div>
-
-<!-- WARNING! When there is more than one fake menu script and style should be attached once. -->
-
-<style>
-  [class*=productsScss-root_slider-] {
-    display: none;
-  }
-  [class*=productsScss-root_slider-].show {
-    display: block;
-  }
-</style>
-
-<script>
-(function () {
-  const lists = document.querySelectorAll(
-    "[class*=productsScss-root_slider-]"
-  );
-  const btnsContainers = document.querySelectorAll(
-    ".menuDesktopScss-inner-1GU"
-  );
   
-  const fakeMenu = (ranges = [[0, lists.length]]) => {
-    ranges.forEach(([start, end], i) => {
-      const listsInRange = Array.from(lists).filter(
-        (el, i) => i >= start && i <= end
+  <!-- WARNING! When there is more than one fake menu script and style should be attached once. 
+  If you want to have more than 1 fake menu and also normal listings on LP you need to add new class to the "menuDesktopScss-inner-1GU" div and 
+  "secondaryItemDesktopCss-root-p6v" buttons. 
+  -->
+  
+  <style>
+    [class*="productsScss-root_slider-"] {
+      display: none;
+    }
+    [class*="productsScss-root_slider-"].show {
+      display: block;
+    }
+  </style>
+  
+  <script>
+    setTimeout(() => {
+      const lists = document.querySelectorAll(
+        "[class*=productsScss-root_slider-2eI]"
       );
 
-      listsInRange[0].classList.add("show");
-      listsInRange.forEach((list) => {
-        list.classList.add("fake-menu-list");
-      });
-      const btns = btnsContainers[i].querySelectorAll(
-        ".secondaryItemDesktopCss-root-p6v"
+      <!--
+      Change class if you need more than one fake menu 
+      -->
+      const btnsContainers = document.querySelectorAll(
+        ".menuDesktopScss-inner-1GU"
       );
-      btns[0].classList.add("secondaryItemDesktopCss-selected-2pA");
-      btns.forEach(function (btn, i) {
-        btn.addEventListener("click", function (e) {
-          const showedList = listsInRange.filter((el) =>
-            el.classList.contains("show")
-          )[0];
-          const activeBtn = Array.from(btns).filter((el) =>
-            el.classList.contains("secondaryItemDesktopCss-selected-2pA")
-          )[0];
-          if (activeBtn && showedList) {
-            showedList.classList.remove("show");
-            activeBtn.classList.remove(
-              "secondaryItemDesktopCss-selected-2pA"
-            );
-          }
-          listsInRange[i].classList.add("show");
-          btns[i].classList.add("secondaryItemDesktopCss-selected-2pA");
-
-          window.scrollBy(0, 1);
-          window.scrollBy(0, -1);
+  
+      <!--
+      If you have normal listings on LP change ranges beneath to the ones that are going to be attached to fake menu
+      -->
+      const fakeMenu = (ranges = [[0, lists.length]]) => {
+        ranges.forEach(([start, end], i) => {
+          const listsInRange = Array.from(lists).filter(
+            (el, i) => i >= start && i <= end
+          );
+  
+          listsInRange[0].classList.add("show");
+          listsInRange.forEach((list) => {
+            list.classList.add("fake-menu-list");
+          });
+          <!-- Class to change if more than 1 fake menu -->
+          const btns = btnsContainers[i].querySelectorAll(
+            ".secondaryItemDesktopCss-root-p6v"
+          );
+          btns[0].classList.add("secondaryItemDesktopCss-selected-2pA");
+          btns.forEach(function (btn, i) {
+            btn.addEventListener("click", function (e) {
+              const showedList = listsInRange.filter((el) =>
+                el.classList.contains("show")
+              )[0];
+              const activeBtn = Array.from(btns).filter((el) =>
+                el.classList.contains("secondaryItemDesktopCss-selected-2pA")
+              )[0];
+              if (activeBtn && showedList) {
+                showedList.classList.remove("show");
+                activeBtn.classList.remove(
+                  "secondaryItemDesktopCss-selected-2pA"
+                );
+              }
+              listsInRange[i].classList.add("show");
+              btns[i].classList.add("secondaryItemDesktopCss-selected-2pA");
+  
+              window.scrollBy(0, 1);
+              window.scrollBy(0, -1);
+            });
+          });
         });
-      });
-    });
-    document
-      .querySelectorAll(
-        '[class*="productsScss-root_slider-"]:not(.fake-menu-list)'
-      )
-      .forEach((el) => el.classList.add("show"));
-  };
-  fakeMenu();
-})();
-</script>  
+        document
+          .querySelectorAll(
+            '[class*="productsScss-root_slider-"]:not(.fake-menu-list)'
+          )
+          .forEach((el) => el.classList.add("show"));
+      };
+      fakeMenu();
+    }, 2000);
+  </script>
+  
 `,
   script: `
 <!-- script -->
