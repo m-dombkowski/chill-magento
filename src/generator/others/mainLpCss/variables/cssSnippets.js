@@ -104,24 +104,6 @@ body [class*="heroBannerScss-banner__promotion"] {
 body{
   overflow-x: hidden;
 }
-[class*="menuDesktopScss-root"]{
-  position: relative;
-}
-[class*="menuDesktopScss-root"]::before,
-[class*="menuDesktopScss-root"]::after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  background-color: #f2f2f2;
-  content: "";
-  width: 100vw;
-}
-[class*="menuDesktopScss-root"]::before{
-  left: -99vw;
-}
-[class*="menuDesktopScss-root"]::after {
-  right: -99vw;
-}
 
 /* no idea what it is */
 @media (min-width: 1600px) {
