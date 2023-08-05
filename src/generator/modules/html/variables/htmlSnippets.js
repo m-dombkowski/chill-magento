@@ -613,5 +613,60 @@ letter-spacing: 1.2px;
 }
 </style>
   `,
+
+  payback: `
+  <!-- script -->
+  <script>
+  
+   let priceValues = [];
+  
+  
+  // Funkcja do przetwarzania cen po zmianie zawartości menu
+  const processPrices = () => {
+    const finalPrices = document.querySelectorAll('[class^="priceSectionCss-productprice__finalpricevalue-"]');
+    priceValues = []; // Wyczyszczenie tablicy przed przetworzeniem nowych cen
+  
+     finalPrices.forEach((price) => {
+      const priceValue = parseFloat(price.textContent.replace(/\s/g, '').replace('zł', '').replace(',', '.'));
+      const roundedPrice = Math.round(priceValue); // Zaokrąglenie do najbliższej liczby całkowitej , tutaj dodajemy proporcje do punktów otrzymanych 
+      priceValues.push(roundedPrice); // Dodanie przetworzonej ceny do tablicy
+    });
+    const paybackContainer = document.querySelectorAll('[class^="priceSectionCss-productprice__discount-"]');
+    paybackContainer.forEach((container, index) => {
+      if (index < priceValues.length) {
+         container.textContent = 'Punkty Payback ${priceValues[index]}'; // Przypisanie wartości do odpowiedniego elementu paybackContainer
+      }
+    });
+  };
+  
+  
+  // Funkcja uruchamiająca MutationObserver
+  const observeMenuChanges = () => {
+    const targetNode = document.querySelector('[data-selector="lp-/lpage/payback-test"]'); //data selektor do obserwowania 
+    
+    if (!targetNode) return; // Sprawdzenie, czy znaleziono element dla MutationObserver
+    
+    const observer = new MutationObserver(processPrices); // Ustawienie processPrices jako funkcji obserwatora
+    
+    const config = { childList: true, subtree: true };
+    observer.observe(targetNode, config);
+  };
+  
+  
+  // Wywołanie funkcji 
+  setTimeout(() => {
+      processPrices(); // Pierwsze przetworzenie cen po 1 sekundzie
+      observeMenuChanges(); // Rozpoczęcie obserwacji zmian w menu
+    }, 1000);
+  </script>
+  <!-- style -->
+  <style>
+    body [class^="priceSectionCss-productprice__discount-"] {
+      font-size: 17px;
+      line-height: 2;
+      color: #ff444f;
+  }
+  </style>
+    `,
 };
 export default htmlSnippets;

@@ -106,6 +106,12 @@ const html = moduleFix({
         updateHtml("animatedBorder", module);
       },
     },
+    {
+      btnName: "payback",
+      callback: ({ module }) => {
+        updateHtml("payback", module);
+      },
+    },
   ],
   newModuleCallback,
   existingModuleCallback,
