@@ -634,7 +634,7 @@ letter-spacing: 1.2px;
     const paybackContainer = document.querySelectorAll('[class^="priceSectionCss-productprice__discount-"]');
     paybackContainer.forEach((container, index) => {
       if (index < priceValues.length) {
-         container.textContent = 'Punkty Payback ${priceValues[index]}'; // Przypisanie wartości do odpowiedniego elementu paybackContainer
+         container.textContent = Punkty Payback priceValues[index]}; // Przypisanie wartości do odpowiedniego elementu paybackContainer, trzeba dodac w tym miejscu template literal
       }
     });
   };
